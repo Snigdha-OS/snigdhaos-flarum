@@ -127,6 +127,15 @@ Options -MultiViews
     </IfModule>
 </IfModule>
 
+# Enable HSTS Security
+<IfModule mod_headers.c>
+  # Enable HSTS for all HTTPS connections
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+  
+  # Prevent browsers from sending Proxy headers
+  RequestHeader unset Proxy
+</IfModule>
+
 # Fix for https://httpoxy.org vulnerability
 <IfModule mod_headers.c>
   RequestHeader unset Proxy
